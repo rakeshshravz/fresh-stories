@@ -16,9 +16,6 @@ function App() {
   ];
 
   // set the stories which is already created in localstorage.
-  useEffect(() => {
-    localStorage.setItem("freshstories", JSON.stringify(stories));
-  }, []);
 
   // get the current stories stored in the localstorage
   const [currentStories, setCurrentStories] = useState(
@@ -26,6 +23,7 @@ function App() {
   );
 
   const postStory = () => {
+    console.log("hello");
     let newStory = {
       title: document.getElementById("title").value,
       desc: document.getElementById("desc").value
@@ -35,6 +33,7 @@ function App() {
     tempCurrentStories.push(newStory);
     localStorage.setItem("freshstories", JSON.stringify(tempCurrentStories));
     setCurrentStories(tempCurrentStories);
+    window.parent.postMessage(tempCurrentStories, "*");
   };
 
   const clearForm = () => {
@@ -59,7 +58,7 @@ function App() {
         })}
       </main>
       <section>
-        <h4>Create story</h4>
+        <h4>Create story 1</h4>
         <div className="story-create-box">
           <div>
             <div>Title:</div>
